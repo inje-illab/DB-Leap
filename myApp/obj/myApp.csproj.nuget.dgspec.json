@@ -1,0 +1,58 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Seok\\Desktop\\Seok\\git\\DB-Leap\\myApp\\myApp.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Seok\\Desktop\\Seok\\git\\DB-Leap\\myApp\\myApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Seok\\Desktop\\Seok\\git\\DB-Leap\\myApp\\myApp.csproj",
+        "projectName": "myApp",
+        "projectPath": "C:\\Users\\Seok\\Desktop\\Seok\\git\\DB-Leap\\myApp\\myApp.csproj",
+        "packagesPath": "C:\\Users\\Seok\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Seok\\Desktop\\Seok\\git\\DB-Leap\\myApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Seok\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
