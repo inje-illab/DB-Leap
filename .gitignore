@@ -1,3 +1,5 @@
 .vscode
+.vs
 bin
-Debug
+debug
+.vs/*
