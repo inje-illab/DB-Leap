@@ -17,6 +17,7 @@ namespace leap
             foreach(Hand hand in frame.Hands)
             {
                 mf.grab(frame);
+
             }
             
         }
