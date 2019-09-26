@@ -117,7 +117,19 @@ namespace leap
             }
         }
 
-
+        public void leapMouseWheelEvent(Leap.Frame frame)
+        {
+            if (frame.Hands[0].PalmNormal.z < -0.65)
+            {
+                // 150 = 스크롤 업
+                mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, 150, 0);
+            }
+            else if (frame.Hands[0].PalmNormal.z > 0.35)
+            {
+                // -150 = 스크롤 다운
+                mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, -150, 0);
+            }
+        }
 
         //public void pinch(Frame frame)    // 모션추가 베이직
         //{
