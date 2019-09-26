@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Threading;
 using Leap;
+using Microsoft.Win32;
 
 namespace leap
 {
@@ -18,6 +19,8 @@ namespace leap
     {
         Controller controller;
         SampleListener sampleListener;
+
+        bool is_registered;
 
         class SampleListener
         {
@@ -61,7 +64,57 @@ namespace leap
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).GetValue("DBLeap") != null)
+            {
+                is_registered = true;
+                MessageBox.Show(is_registered.ToString() + " => 레지스트리를 제거합니다.");
+                RemoveApplicationFromStartup();
+            }
+            else
+            {
+                is_registered = false;
+                MessageBox.Show(is_registered.ToString() + " => 레지스트리를 추가합니다.");
+                AddApplicationToStartup();
+            }
+            try
+            {
+                label1.Text = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true).GetValue("DBLeap").ToString();
+            }
+            catch
+            {
+                label1.Text = "Empty";
+            }
+        }
 
+        public static void AddApplicationToStartup()
+        {
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+                {
+                    key.SetValue("DBLeap", "\"" + Application.ExecutablePath + "\"");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("오류발생");
+            }
+            
+        }
+
+        public static void RemoveApplicationFromStartup()
+        {
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+                {
+                    key.DeleteValue("DBLeap", false);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("오류발생");
+            }
         }
     }
 }

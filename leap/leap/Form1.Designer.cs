@@ -43,7 +43,7 @@
             this.bottomNotifiyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("bottomNotifiyIcon.Icon")));
             this.bottomNotifiyIcon.Text = "notifyIcon1";
             this.bottomNotifiyIcon.Visible = true;
-            this.bottomNotifiyIcon.DoubleClick += new System.EventHandler(this.onDoubleClick);
+            this.bottomNotifiyIcon.DoubleClick += new System.EventHandler(this.button1_Click);
             // 
             // contextMenuStrip
             // 
@@ -70,7 +70,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(203, 41);
+            this.button1.Location = new System.Drawing.Point(32, 67);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 127);
+            this.ClientSize = new System.Drawing.Size(608, 165);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
