@@ -7,17 +7,22 @@ using Leap;
 
 namespace leap
 {
-    class LeapControllerListener  
+    class LeapControllerListener
     {
+        MotionFuntion motionFunction;
+
+        public LeapControllerListener(int width, int height)
+        {
+            motionFunction = new MotionFuntion(width, height);
+        }
         // Controller Frame Listener
-        MotionFuntion mf = new MotionFuntion();
         public void OnFrame(object sender, FrameEventArgs args) // 모션 인식 후, 동작 (마우스 이동같이)
         {
             Frame frame = args.frame;
             foreach(Hand hand in frame.Hands)
             {
-                mf.grab(frame);
-
+                motionFunction.grab(frame);
+                motionFunction.setMouseCursor(frame);
             }
             
         }
