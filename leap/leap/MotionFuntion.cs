@@ -13,8 +13,12 @@ namespace leap
     {
         [DllImport("user32.dll")]
         private static extern bool SetCursorPos(int x, int y);
+        [DllImport("user32.dll")]
+        static extern void mouse_event(uint dwFlags, uint dx, uint dy, int dwData, int dwExtraInfo);
 
-        bool grab_ready = false;
+        double pointX=0.0, pointY=0.0;
+        bool sensitiveMoving = false;
+        bool pinch_ready = false;
         private int screenWidth, screenHeight;
 
         public MotionFuntion(int screenWidth, int screenHeight)
@@ -25,22 +29,60 @@ namespace leap
 
         public void grab(Frame frame)
         {
-            Hand hand = frame.Hands[0];
-            if (hand.GrabStrength == 1 && !grab_ready)
-                grab_ready = true;
-            else if (hand.GrabStrength == 0 && grab_ready)
+            if (frame.Hands.Count == 2)
             {
-                grab_ready = false;
-                MessageBox.Show("Grab 동작");
+                Hand hand = frame.Hands[1];
+                if (hand.GrabStrength == 1 && !sensitiveMoving)
+                {
+                    sensitiveMoving = true;
+                    pointX = Cursor.Position.X;
+                    pointY = Cursor.Position.Y;
+                    Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY);
+                }
+                else if (hand.GrabStrength == 0 && sensitiveMoving)
+                {
+                    sensitiveMoving = false;
+                }
             }
         }
 
         public void setMouseCursor(Frame frame)
         {
-            Console.WriteLine("{0}, {1}, {2}, {3}", Cursor.Position.X, Cursor.Position.Y, frame.Hands[0].PalmPosition.x, frame.Hands[0].PalmPosition.y);
-            double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
-            double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
-            SetCursorPos((int)mousePointX, (int)mousePointY);
+            if (!sensitiveMoving)
+            {
+                //Console.WriteLine("{0}, {1}, {2}, {3}", Cursor.Position.X, Cursor.Position.Y, frame.Hands[0].PalmPosition.x, frame.Hands[0].PalmPosition.y);
+                double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
+                double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
+                SetCursorPos((int)mousePointX, (int)mousePointY);
+                Console.WriteLine("일반동작 감지 : " + (int)mousePointX + ", " + (int)mousePointY);
+            } else {
+                double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
+                double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
+                pointX += (mousePointX - pointX) / 300;
+                pointY += (mousePointY - pointY) / 300;
+
+                SetCursorPos((int)pointX, (int)pointY);
+                Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY);
+            }
         }
+
+        public void pinch(Frame frame)
+        {
+            Hand hand = frame.Hands[0];
+            if (hand.PinchStrength == 1 && !pinch_ready)
+                pinch_ready = true;
+            else if(hand.PinchStrength == 0 && pinch_ready)
+            {
+                mouse_event((uint)MotionEnum.MOUSE.MouseLeftDown, 0, 0, 0, 0);
+                mouse_event((uint)MotionEnum.MOUSE.MouseLeftUp, 0, 0, 0, 0);
+                Console.WriteLine("삔취~");
+                pinch_ready = false;
+            }
+        }
+
+        //public void pinch(Frame frame)    // 모션추가 베이직
+        //{
+        //    Hand hand = frame.Hands[0];
+        //}
     }
 }

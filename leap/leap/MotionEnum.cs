@@ -12,7 +12,7 @@ namespace leap
         // ex) MotionEnum.GRAB.Grab => Grab
         public enum GRAB : int { UnGrab, Grab }
         public enum PINCH : int { UnPinch, Pinch }
-        public enum MOUSE : int
+        public enum MOUSE : uint
         {
             MouseLeftDown = 0x0002,
             MouseLeftUp = 0x0004,
