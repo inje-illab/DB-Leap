@@ -18,8 +18,7 @@ namespace leap
             Application.Exit();
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            
-            Application.Run(new DbLeapForm());
+            //Application.Run(new DbLeapForm());
         }
     }
 }

@@ -10,15 +10,15 @@ namespace leap
     {
         // ex) (long) MotionEnum.GRAB.Grab => 1
         // ex) MotionEnum.GRAB.Grab => Grab
-        public enum GRAB : long { Grab = 1L, UnGrab = 0 }
-        public enum PINCH : long { Pinch = 1L, UnPinch = 0 }
+        public enum GRAB : int { UnGrab, Grab }
+        public enum PINCH : int { UnPinch, Pinch }
         public enum MOUSE : int
         {
-            MouseLeftDown = 0x02,
-            MouseLeftUp = 0x04,
-            MouseRightDown = 0x08,
-            MouseRightUp = 0x10,
-            MouseWheel = 0x00000800
+            MouseLeftDown = 0x0002,
+            MouseLeftUp = 0x0004,
+            MouseRightDown = 0x0008,
+            MouseRightUp = 0x0010,
+            MouseWheel = 0x0800
         }
     }
 }
