@@ -47,7 +47,7 @@ namespace leap
         public DbLeapForm()
         {
             InitializeComponent();
-
+            
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             this.Visible = false;

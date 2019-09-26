@@ -20,7 +20,6 @@ namespace leap
             Application.SetCompatibleTextRenderingDefault(false);
             Controller controller = new Controller();
             Application.Run(new DbLeapForm());
-
         }
     }
 }
