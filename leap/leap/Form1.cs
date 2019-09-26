@@ -19,17 +19,28 @@ namespace leap
     {
         Controller controller;
         SampleListener sampleListener;
+        
 
         bool is_registered;
 
         class SampleListener
         {
+            int grab_integer;
+            bool grab_ready = false;
             public void OnFrame(object sender, FrameEventArgs args)
             {
                 Frame frame = args.frame;
                 foreach (Hand hand in frame.Hands)
                 {
-                    Console.WriteLine("{0}", (int)hand.PalmPosition[0]);
+                    grab_integer= (int)frame.Hands[0].GrabStrength;
+                    if (grab_integer == 1 && !grab_ready)
+                        grab_ready = true;
+                    else if (grab_integer == 0 && grab_ready)
+                    {
+                        grab_ready = false;
+                        MessageBox.Show("Grab 동작");
+                    }
+//                    Console.WriteLine("{0}", (int)hand.PalmPosition[0]);
                 }
             }
         }
@@ -37,11 +48,11 @@ namespace leap
         {
             InitializeComponent();
 
-            //this.WindowState = FormWindowState.Minimized;
-            //this.ShowInTaskbar = false;
-            //this.Visible = false;
-            //this.bottomNotifiyIcon.Visible = true;
-            //bottomNotifiyIcon.ContextMenuStrip = contextMenuStrip;
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
+            this.Visible = false;
+            this.bottomNotifiyIcon.Visible = true;
+            bottomNotifiyIcon.ContextMenuStrip = contextMenuStrip;
 
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
