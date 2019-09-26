@@ -16,9 +16,9 @@ namespace leap
         static void Main(string[] args)
         {
             Application.Exit();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Controller controller = new Controller();
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            
             Application.Run(new DbLeapForm());
         }
     }

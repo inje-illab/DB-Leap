@@ -88,7 +88,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DbLeapForm";
             this.Text = "DBLeap";
-            this.Load += new System.EventHandler(this.DbLeapForm_Load);
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -18,36 +18,17 @@ namespace leap
     public partial class DbLeapForm : Form
     {
         Controller controller;
-        SampleListener sampleListener;
-        
-
         bool is_registered;
 
-        class SampleListener
-        {
-            int grab_integer;
-            bool grab_ready = false;
-            public void OnFrame(object sender, FrameEventArgs args)
-            {
-                Frame frame = args.frame;
-                foreach (Hand hand in frame.Hands)
-                {
-                    grab_integer= (int)frame.Hands[0].GrabStrength;
-                    if (grab_integer == 1 && !grab_ready)
-                        grab_ready = true;
-                    else if (grab_integer == 0 && grab_ready)
-                    {
-                        grab_ready = false;
-                        MessageBox.Show("Grab 동작");
-                    }
-//                    Console.WriteLine("{0}", (int)hand.PalmPosition[0]);
-                }
-            }
-        }
         public DbLeapForm()
         {
             InitializeComponent();
-            
+            controller = new Controller();
+            LeapControllerListener leapListener = new LeapControllerListener();
+            controller.Device += leapListener.OnConnect;
+            //controller.Device += leapListener.OnDisConnect;
+            controller.FrameReady += leapListener.OnFrame;
+
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
             this.Visible = false;
@@ -58,14 +39,6 @@ namespace leap
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void DbLeapForm_Load(object sender, EventArgs e)
-        {
-            //MessageBox.Show("로드 테스트");
-            controller = new Controller();
-            sampleListener = new SampleListener();
-            controller.FrameReady += sampleListener.OnFrame;
         }
 
         private void onDoubleClick(object sender, EventArgs e)

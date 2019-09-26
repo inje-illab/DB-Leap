@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace leap
 {
-    public static class MotionEnum
+    public static class MotionEnum      // 사용자 입력한 동작이 의미할 모션 
     {
         // ex) (long) MotionEnum.GRAB.Grab => 1
         // ex) MotionEnum.GRAB.Grab => Grab
