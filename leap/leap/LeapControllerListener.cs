@@ -7,10 +7,15 @@ using Leap;
 
 namespace leap
 {
-    class LeapControllerListener  
+    class LeapControllerListener
     {
+        MotionFuntion motionFunction;
+
+        public LeapControllerListener(int width, int height)
+        {
+            motionFunction = new MotionFuntion(width, height);
+        }
         // Controller Frame Listener
-        MotionFuntion mf = new MotionFuntion();
         int mainHandID = 0;
         public void OnFrame(object sender, FrameEventArgs args) // 모션 인식 후, 동작 (마우스 이동같이)
         {
@@ -27,12 +32,14 @@ namespace leap
                 Frame frame = args.frame;
                 if (frame.Hands.Count > 0)
                 {
-                    mf.grab(frame);
+                    motionFunction.grab(frame);
                     if (frame.Hands.Count == 2)
                     {
 
                     }
                 }
+                motionFunction.grab(frame);
+                motionFunction.setMouseCursor(frame);
             }
             catch { }
         }

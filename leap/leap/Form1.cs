@@ -17,6 +17,7 @@ namespace leap
 
     public partial class DbLeapForm : Form
     {
+
         Controller controller;
         bool is_registered;
 
@@ -24,7 +25,10 @@ namespace leap
         {
             InitializeComponent();
             controller = new Controller();
-            LeapControllerListener leapListener = new LeapControllerListener();
+            LeapControllerListener leapListener = new LeapControllerListener(
+                SystemInformation.VirtualScreen.Width,
+                SystemInformation.VirtualScreen.Height);
+
             controller.Device += leapListener.OnConnect;
             //controller.Device += leapListener.OnDisConnect;
             controller.FrameReady += leapListener.OnFrame;
