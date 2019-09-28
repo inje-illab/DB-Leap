@@ -18,12 +18,13 @@ namespace leap
         public void OnFrame(object sender, FrameEventArgs args) // 모션 인식 후, 동작 (마우스 이동같이)
         {
             Frame frame = args.frame;
-            Console.WriteLine(frame.Hands.Count);
+            //Console.WriteLine(frame.Hands.Count);
             if (frame.Hands.Count > 0)
             {
                 motionFunction.setMouseCursor(frame);
                 motionFunction.grab(frame);
                 motionFunction.pinch(frame);
+                motionFunction.wheel(frame);
                 //motionFunction.rightClick();
             }
         }
@@ -31,8 +32,7 @@ namespace leap
         // Device connection check listener
         public void OnConnect(object sender, DeviceEventArgs args)
         {
-
-            Console.WriteLine(args.Device.IsStreaming.ToString());
+            //Console.WriteLine(args.Device.IsStreaming.ToString());
         }
 
         //public void OnDisConnect(object sender, DeviceEventArgs args)

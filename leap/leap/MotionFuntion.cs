@@ -76,7 +76,7 @@ namespace leap
                 {
                     mouse_event((uint)MotionEnum.MOUSE.MouseLeftDown, 0, 0, 0, 0);
                     mouse_event((uint)MotionEnum.MOUSE.MouseLeftUp, 0, 0, 0, 0);
-                    Console.WriteLine("삔취~");
+                    //Console.WriteLine("삔취~");
                     pinch_ready = false;
                     frameCount = 0;
                 }
@@ -84,7 +84,7 @@ namespace leap
                 {
                     mouse_event((uint)MotionEnum.MOUSE.MouseRightDown, 0, 0, 0, 0);
                     mouse_event((uint)MotionEnum.MOUSE.MouseRightUp, 0, 0, 0, 0);
-                    Console.WriteLine("R클릭~");
+                    //Console.WriteLine("R클릭~");
                     pinch_ready = false;
                     frameCount = 0;
                 }
@@ -108,29 +108,29 @@ namespace leap
                 double scaledX = (mousePointX - pointX) / 300;
                 double scaledY = (mousePointY - pointY) / 300;
                 //if (Math.Abs(scaledX) > 1)
-                    pointX += scaledX;
+                pointX += scaledX;
                 //if (Math.Abs(scaledY) > 1)
-                    pointY += scaledY;
+                pointY += scaledY;
 
                 SetCursorPos((int)pointX, (int)pointY);
                 //Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY + " = " + frame.Hands.Count);
             }
         }
 
-        public void leapMouseWheelEvent(Leap.Frame frame)
+        public void wheel(Leap.Frame frame)
         {
-            if (frame.Hands[0].PalmNormal.z < -0.65)
-            {
-                // 150 = 스크롤 업
-                mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, 150, 0);
-            }
-            else if (frame.Hands[0].PalmNormal.z > 0.35)
-            {
-                // -150 = 스크롤 다운
-                mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, -150, 0);
-            }
+            mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, accelerationWheel(frame.Hands[0].PalmNormal.z), 0);
         }
-
+        private int accelerationWheel(double handPostion)
+        {
+            int returnAcceleration = 0;
+            if(handPostion < -0.55){
+                returnAcceleration = (int)(Math.Abs(handPostion)*100 - 45);
+            }else if(handPostion > 0.40){
+                returnAcceleration = -(int)(Math.Abs(handPostion)*100 - 30);
+            }
+            return returnAcceleration;
+        }
         //public void pinch(Frame frame)    // 모션추가 베이직
         //{
         //    Hand hand = frame.Hands[0];
