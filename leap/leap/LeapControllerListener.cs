@@ -18,6 +18,7 @@ namespace leap
         public void OnFrame(object sender, FrameEventArgs args) // 모션 인식 후, 동작 (마우스 이동같이)
         {
             Frame frame = args.frame;
+            Console.WriteLine(frame.Hands.Count);
             if (frame.Hands.Count > 0)
             {
                 motionFunction.setMouseCursor(frame);

@@ -99,7 +99,7 @@ namespace leap
                 double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
                 double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
                 SetCursorPos((int)mousePointX, (int)mousePointY);
-                //Console.WriteLine("일반동작 감지 : " + (int)mousePointX + ", " + (int)mousePointY);
+                //Console.WriteLine("일반동작 감지 : " + (int)mousePointX + ", " + (int)mousePointY + " = " + frame.Hands.Count);
             }
             else
             {
@@ -113,7 +113,7 @@ namespace leap
                     pointY += scaledY;
 
                 SetCursorPos((int)pointX, (int)pointY);
-                //Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY);
+                //Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY + " = " + frame.Hands.Count);
             }
         }
 
