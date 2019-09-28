@@ -1,11 +1,7 @@
 ﻿using Leap;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace leap
 {
@@ -115,14 +111,13 @@ namespace leap
                     pointX += scaledX;
                     //if (Math.Abs(scaledY) > 1)
                     pointY += scaledY;
-
                     SetCursorPos((int)pointX, (int)pointY);
                     //Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY + " = " + frame.Hands.Count);
                 }
             }
         }
 
-        public void leapMouseWheelEvent(Leap.Frame frame)
+        public void wheel(Leap.Frame frame)
         {
             if (frame.Hands[0].PalmNormal.z < -0.65)
             {
