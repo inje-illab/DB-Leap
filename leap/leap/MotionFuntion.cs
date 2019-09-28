@@ -97,7 +97,6 @@ namespace leap
         {
             if (!pull_ready && !pinch_ready)
             {
-<<<<<<< HEAD
                 if (!sensitiveMoving)
                 {
                     //Console.WriteLine("{0}, {1}, {2}, {3}", Cursor.Position.X, Cursor.Position.Y, frame.Hands[0].PalmPosition.x, frame.Hands[0].PalmPosition.y);
@@ -116,25 +115,6 @@ namespace leap
                     pointX += scaledX;
                     //if (Math.Abs(scaledY) > 1)
                     pointY += scaledY;
-=======
-                //Console.WriteLine("{0}, {1}, {2}, {3}", Cursor.Position.X, Cursor.Position.Y, frame.Hands[0].PalmPosition.x, frame.Hands[0].PalmPosition.y);
-                double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
-                double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
-                SetCursorPos((int)mousePointX, (int)mousePointY);
-                //Console.WriteLine("일반동작 감지 : " + (int)mousePointX + ", " + (int)mousePointY + " = " + frame.Hands.Count);
-            }
-            else
-            {
-                double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
-                double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
-                double scaledX = (mousePointX - pointX) / 300;
-                double scaledY = (mousePointY - pointY) / 300;
-                //if (Math.Abs(scaledX) > 1)
-                pointX += scaledX;
-                //if (Math.Abs(scaledY) > 1)
-                pointY += scaledY;
->>>>>>> b8b1416c0436857f66909d6a26df8401ebfaccff
-
                     SetCursorPos((int)pointX, (int)pointY);
                     //Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY + " = " + frame.Hands.Count);
                 }
@@ -155,7 +135,6 @@ namespace leap
             }
             return returnAcceleration;
         }
-<<<<<<< HEAD
 
         public void grabPull(Frame frame)    // 모션추가 베이직
         {
@@ -180,11 +159,5 @@ namespace leap
                 pull_ready = false;
         }
 
-=======
->>>>>>> b8b1416c0436857f66909d6a26df8401ebfaccff
-        //public void pinch(Frame frame)    // 모션추가 베이직
-        //{
-        //    Hand hand = frame.Hands[0];
-        //}
     }
 }
