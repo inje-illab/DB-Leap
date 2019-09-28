@@ -78,7 +78,7 @@ namespace leap
                 {
                     mouse_event((uint)MotionEnum.MOUSE.MouseLeftDown, 0, 0, 0, 0);
                     mouse_event((uint)MotionEnum.MOUSE.MouseLeftUp, 0, 0, 0, 0);
-                    //Console.WriteLine("삔취~");
+                    Console.WriteLine("삔취~");
                     pinch_ready = false;
                     frameCount = 0;
                 }
@@ -86,7 +86,7 @@ namespace leap
                 {
                     mouse_event((uint)MotionEnum.MOUSE.MouseRightDown, 0, 0, 0, 0);
                     mouse_event((uint)MotionEnum.MOUSE.MouseRightUp, 0, 0, 0, 0);
-                    //Console.WriteLine("R클릭~");
+                    Console.WriteLine("R클릭~");
                     pinch_ready = false;
                     frameCount = 0;
                 }
@@ -97,7 +97,6 @@ namespace leap
         {
             if (!pull_ready && !pinch_ready)
             {
-<<<<<<< HEAD
                 if (!sensitiveMoving)
                 {
                     //Console.WriteLine("{0}, {1}, {2}, {3}", Cursor.Position.X, Cursor.Position.Y, frame.Hands[0].PalmPosition.x, frame.Hands[0].PalmPosition.y);
@@ -116,24 +115,6 @@ namespace leap
                     pointX += scaledX;
                     //if (Math.Abs(scaledY) > 1)
                     pointY += scaledY;
-=======
-                //Console.WriteLine("{0}, {1}, {2}, {3}", Cursor.Position.X, Cursor.Position.Y, frame.Hands[0].PalmPosition.x, frame.Hands[0].PalmPosition.y);
-                double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
-                double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
-                SetCursorPos((int)mousePointX, (int)mousePointY);
-                //Console.WriteLine("일반동작 감지 : " + (int)mousePointX + ", " + (int)mousePointY + " = " + frame.Hands.Count);
-            }
-            else
-            {
-                double mousePointX = (frame.Hands[0].PalmPosition.x + 300) / 600 * screenWidth;
-                double mousePointY = (1 - (frame.Hands[0].PalmPosition.y - 200) / 300) * screenHeight;
-                double scaledX = (mousePointX - pointX) / 300;
-                double scaledY = (mousePointY - pointY) / 300;
-                //if (Math.Abs(scaledX) > 1)
-                pointX += scaledX;
-                //if (Math.Abs(scaledY) > 1)
-                pointY += scaledY;
->>>>>>> b8b1416c0436857f66909d6a26df8401ebfaccff
 
                     SetCursorPos((int)pointX, (int)pointY);
                     //Console.WriteLine("세부동작 감지 : " + pointX + ", " + pointY + " = " + frame.Hands.Count);
@@ -141,21 +122,19 @@ namespace leap
             }
         }
 
-        public void wheel(Leap.Frame frame)
+        public void leapMouseWheelEvent(Leap.Frame frame)
         {
-            mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, accelerationWheel(frame.Hands[0].PalmNormal.z), 0);
-        }
-        private int accelerationWheel(double handPostion)
-        {
-            int returnAcceleration = 0;
-            if(handPostion < -0.55){
-                returnAcceleration = (int)(Math.Abs(handPostion)*100 - 45);
-            }else if(handPostion > 0.40){
-                returnAcceleration = -(int)(Math.Abs(handPostion)*100 - 30);
+            if (frame.Hands[0].PalmNormal.z < -0.65)
+            {
+                // 150 = 스크롤 업
+                mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, 150, 0);
             }
-            return returnAcceleration;
+            else if (frame.Hands[0].PalmNormal.z > 0.35)
+            {
+                // -150 = 스크롤 다운
+                mouse_event((uint)MotionEnum.MOUSE.MouseWheel, 0, 0, -150, 0);
+            }
         }
-<<<<<<< HEAD
 
         public void grabPull(Frame frame)    // 모션추가 베이직
         {
@@ -163,7 +142,7 @@ namespace leap
             if (hand.GrabStrength == 1 && !pull_ready)     // main hand -> grab
             {
                 pull_ready = true;
-                tmp_palm = hand.PalmPosition[2]; // 초기값 입력
+                tmp_palm = hand.PalmPosition[2]; // 초기값 입력 -
             }
             else if (hand.GrabStrength == 1 && pull_ready)
             {
@@ -180,8 +159,6 @@ namespace leap
                 pull_ready = false;
         }
 
-=======
->>>>>>> b8b1416c0436857f66909d6a26df8401ebfaccff
         //public void pinch(Frame frame)    // 모션추가 베이직
         //{
         //    Hand hand = frame.Hands[0];

@@ -24,13 +24,8 @@ namespace leap
                 motionFunction.setMouseCursor(frame);
                 motionFunction.grab(frame);
                 motionFunction.pinch(frame);
-<<<<<<< HEAD
-                motionFunction.leapMouseWheelEvent(frame);
-                motionFunction.grabPull(frame);
-
-=======
                 motionFunction.wheel(frame);
->>>>>>> b8b1416c0436857f66909d6a26df8401ebfaccff
+                motionFunction.grabPull(frame);
                 //motionFunction.rightClick();
             }
         }
