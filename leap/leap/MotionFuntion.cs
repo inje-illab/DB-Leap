@@ -16,6 +16,7 @@ namespace leap
         double tmp_palm = 0.0;
         bool sensitiveMoving = false;
         bool pinch_ready = false;
+        bool drag_ready = false;
         bool pull_ready = false;
         private int screenWidth, screenHeight;
         private int frameCount = 0;
@@ -58,40 +59,24 @@ namespace leap
             else if (hand.PinchStrength == 1 && pinch_ready)
             {
                 frameCount++;
-                //if (frameCount == 180)
-                //{
-                //    mouse_event((uint)MotionEnum.MOUSE.MouseRightDown, 0, 0, 0, 0);
-                //    mouse_event((uint)MotionEnum.MOUSE.MouseRightUp, 0, 0, 0, 0);
-                //    Console.WriteLine("R클릭~");
-                //    pinch_ready = false;
-                //    frameCount = 0;
-                //}
-
+                if (frameCount > 10 && !drag_ready)
+                {
+                    mouse_event((uint)MotionEnum.MOUSE.MouseLeftDown, 0, 0, 0, 0);
+                    drag_ready = true;
+                }
             }
             else if (hand.PinchStrength == 0 && pinch_ready)
             {
-                if (frameCount < 180)
-                {
-                    mouse_event((uint)MotionEnum.MOUSE.MouseLeftDown, 0, 0, 0, 0);
-                    mouse_event((uint)MotionEnum.MOUSE.MouseLeftUp, 0, 0, 0, 0);
-                    Console.WriteLine("삔취~");
-                    pinch_ready = false;
-                    frameCount = 0;
-                }
-                else
-                {
-                    mouse_event((uint)MotionEnum.MOUSE.MouseRightDown, 0, 0, 0, 0);
-                    mouse_event((uint)MotionEnum.MOUSE.MouseRightUp, 0, 0, 0, 0);
-                    Console.WriteLine("R클릭~");
-                    pinch_ready = false;
-                    frameCount = 0;
-                }
+                mouse_event((uint)MotionEnum.MOUSE.MouseLeftUp, 0, 0, 0, 0);
+                pinch_ready = false;
+                drag_ready = false;
+                frameCount = 0;
             }
         }
 
         public void setMouseCursor(Frame frame)
         {
-            if (!pull_ready && !pinch_ready)
+            if (!pull_ready)
             {
                 if (!sensitiveMoving)
                 {
@@ -139,19 +124,16 @@ namespace leap
                 pull_ready = true;
                 tmp_palm = hand.PalmPosition[2]; // 초기값 입력 -
             }
-            else if (hand.GrabStrength == 1 && pull_ready)
+            else if (hand.GrabStrength == 0 && pull_ready)
             {
+                pull_ready = false;
                 if ((tmp_palm - hand.PalmPosition[2]) < -200)
                 {
                     mouse_event((uint)MotionEnum.MOUSE.MouseRightDown, 0, 0, 0, 0);
                     mouse_event((uint)MotionEnum.MOUSE.MouseRightUp, 0, 0, 0, 0);
-                    pull_ready = false;
-                    Console.WriteLine("R클릭~");
                 }
                 Console.WriteLine("waiting pull ...  => " + hand.PalmPosition[2] + " : remain => " + (tmp_palm - hand.PalmPosition[2]));
             }
-            else if (hand.GrabStrength == 0 && pull_ready)
-                pull_ready = false;
         }
 
         //public void pinch(Frame frame)    // 모션추가 베이직

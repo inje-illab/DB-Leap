@@ -29,6 +29,7 @@ namespace leap
                 SystemInformation.VirtualScreen.Width,
                 SystemInformation.VirtualScreen.Height);
 
+
             controller.Device += leapListener.OnConnect;
             //controller.Device += leapListener.OnDisConnect;
             controller.FrameReady += leapListener.OnFrame;
