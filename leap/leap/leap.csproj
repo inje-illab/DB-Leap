@@ -75,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -92,6 +93,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\Drag.png" />
+    <None Include="Resources\Scroll.png" />
+    <None Include="Resources\Right_Click.png" />
+    <None Include="Resources\Move.png" />
+    <None Include="Resources\main.png" />
+    <None Include="Resources\Left_Click.png" />
+    <None Include="Resources\Detail_Control.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
