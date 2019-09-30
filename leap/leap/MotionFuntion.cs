@@ -141,7 +141,7 @@ namespace leap
         {
             Hand hand = frame.Hands[0];
             Console.WriteLine("clabGun 진입");
-            GunAction.drawAim(Cursor.Position.X, Cursor.Position.Y, Color.Red);
+            //GunAction.drawAim(Cursor.Position.X, Cursor.Position.Y, Color.Red);
         }
         
 

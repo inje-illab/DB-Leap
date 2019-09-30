@@ -5,11 +5,17 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace leap
 {
     class GunAction
     {
+        [DllImport("user32.dll")]
+        internal static extern IntPtr GetDC(IntPtr hwnd);
+        [DllImport("user32.dll")]
+        internal static extern void ReleaseDC(IntPtr dc);
+
         [DllImport("GDI32.dll")]
         private static extern bool DeleteDC(int hdc);
         [DllImport("GDI32.dll")]
@@ -33,15 +39,24 @@ namespace leap
 
         public static void drawAim(int x, int y, Color clr)
         {
-            int hdcSrc = GetWindowDC(GetDesktopWindow());
-            int newcolor = ColorTranslator.ToWin32(clr);
-            int myBrush = CreateSolidBrush(newcolor);
-            SelectObject(hdcSrc, myBrush);
-            Ellipse(hdcSrc, x, y, x+10, y+10);
-            DeleteDC(hdcSrc);
-            DeleteObject(myBrush);
-            Console.WriteLine("clabGun 실행");
-            
+            IntPtr hdcSrc = GetDC(IntPtr.Zero);
+            //int hdcSrc = GetWindowDC(GetDesktopWindow());
+            Graphics g = Graphics.FromHdc(hdcSrc);
+            //int newcolor = ColorTranslator.ToWin32(clr);
+            //int myPen = CreatePen(0, 1, newcolor);
+            //int myBrush = CreateSolidBrush(newcolor);
+            //SelectObject(hdcSrc, myPen);
+            //SelectObject(hdcSrc, myBrush);
+
+            g.FillEllipse(new SolidBrush(Color.Red), x, x + 1, y, y + 1);
+            //DeleteDC(hdcSrc);
+            //DeleteObject(myBrush);
+            //g.Clear(Color.Empty);
+
+            g.Dispose();
+            ReleaseDC(hdcSrc);
+            //Console.WriteLine("clabGun 실행");
+
         }
     }
 }

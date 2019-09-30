@@ -21,9 +21,11 @@ namespace leap
         {
             Frame frame = args.frame;
             //Console.WriteLine(frame.Hands.Count);
-            motionFunction.clabGun(frame);
+            
             if (frame.Hands.Count > 0)
             {
+                GunAction.setcur();
+                motionFunction.clabGun(frame);
                 motionFunction.setMouseCursor(frame);
                 motionFunction.grab(frame);
                 motionFunction.pinch(frame);
