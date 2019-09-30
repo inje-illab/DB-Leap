@@ -121,6 +121,9 @@
   <data name="Right_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Right_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="play_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Detail_Control" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Detail_Control.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,10 +136,16 @@
   <data name="Scroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Scroll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="stop_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stop_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Left_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Left_Click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Drag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Drag.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="stop_icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stop_icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -93,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MetroFramework.txt" />
+    <None Include="Resources\stop_icon1.png" />
+    <None Include="Resources\stop_icon.png" />
+    <None Include="Resources\play_icon.png" />
     <None Include="Resources\Drag.png" />
     <None Include="Resources\Scroll.png" />
     <None Include="Resources\Right_Click.png" />

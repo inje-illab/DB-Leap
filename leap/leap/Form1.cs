@@ -15,7 +15,8 @@ namespace leap
     {
         Timer timer = new Timer();
         int pictureBox_ID = 0;
-        int timer_cnt = 1;
+        int cnt = 7;
+        bool auto = true;
 
         public Form1() {
             InitializeComponent();
@@ -41,9 +42,6 @@ namespace leap
                 case 4: pictureBox5.Visible = true; break;
                 case 5: pictureBox6.Visible = true; break;
                 case 6: pictureBox7.Visible = true; break;
-                default:
-                    timer.Stop();
-                    break;
             }
         }
 
@@ -56,34 +54,23 @@ namespace leap
                 case 4: radioButton5.Checked = true; break;
                 case 5: radioButton6.Checked = true; break;
                 case 6: radioButton7.Checked = true; break;
-                default:
-                    timer.Stop();
-                    break;
             }
         }
 
         void timer_Tick(object sender, EventArgs e) {
-            switch (timer_cnt) {
-                case 0: pictureBox_ID = 0; break;
-                case 1: pictureBox_ID = 1; break;
-                case 2: pictureBox_ID = 2; break;
-                case 3: pictureBox_ID = 3; break;
-                case 4: pictureBox_ID = 4; break;
-                case 5: pictureBox_ID = 5; break;
-                case 6: pictureBox_ID = 6; break;
-                default:
-                    timer.Stop();
-                    break;
-            }
 
-            timer_cnt++;
+            pictureBox_ID++;
             Initialization();
+
+            if (pictureBox_ID == cnt)
+                pictureBox_ID = 0;
+
             PictureBox_Check();
             RadioButton_Check();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            timer.Interval = 3000; // 1000 = 1초
+            timer.Interval = 4000; // 1000 = 1초
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             PictureBox_Check();
@@ -109,6 +96,43 @@ namespace leap
             Initialization();
             PictureBox_Check();
             RadioButton_Check();
+        }
+        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(auto == true)
+            {
+                timer.Stop();
+                radioButton1.Enabled = true;
+                radioButton2.Enabled = true;
+                radioButton3.Enabled = true;
+                radioButton4.Enabled = true;
+                radioButton5.Enabled = true;
+                radioButton6.Enabled = true;
+                radioButton7.Enabled = true;
+                auto = false;
+                button1.Visible = false;
+                button2.Visible = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(auto == false)
+            {
+                timer.Start();
+                radioButton1.Enabled = false;
+                radioButton2.Enabled = false;
+                radioButton3.Enabled = false;
+                radioButton4.Enabled = false;
+                radioButton5.Enabled = false;
+                radioButton6.Enabled = false;
+                radioButton7.Enabled = false;
+                auto = true;
+                button1.Visible = true;
+                button2.Visible = false;
+            }
+
         }
     }
 }
