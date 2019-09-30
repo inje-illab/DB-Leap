@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Leap;
 
 namespace leap
@@ -19,6 +21,7 @@ namespace leap
         {
             Frame frame = args.frame;
             //Console.WriteLine(frame.Hands.Count);
+            motionFunction.clabGun(frame);
             if (frame.Hands.Count > 0)
             {
                 motionFunction.setMouseCursor(frame);
@@ -32,7 +35,7 @@ namespace leap
         // Device connection check listener
         public void OnConnect(object sender, DeviceEventArgs args)
         {
-            //Console.WriteLine(args.Device.IsStreaming.ToString());
+            Console.WriteLine(args.Device.IsStreaming.ToString());
         }
 
         //public void OnDisConnect(object sender, DeviceEventArgs args)

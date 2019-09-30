@@ -105,5 +105,10 @@ namespace leap
                 MessageBox.Show("오류발생");
             }
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            GunAction.drawAim(Cursor.Position.X, Cursor.Position.Y, Color.Red);
+        }
     }
 }

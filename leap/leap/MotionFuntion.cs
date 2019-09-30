@@ -1,5 +1,6 @@
 ﻿using Leap;
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -116,7 +117,7 @@ namespace leap
             }
         }
 
-        public void grabPull(Frame frame)    // 모션추가 베이직
+        public void grabPull(Frame frame) 
         {
             Hand hand = frame.Hands[0];
             if (hand.GrabStrength == 1 && !pull_ready)     // main hand -> grab
@@ -135,6 +136,14 @@ namespace leap
                 Console.WriteLine("waiting pull ...  => " + hand.PalmPosition[2] + " : remain => " + (tmp_palm - hand.PalmPosition[2]));
             }
         }
+
+        public void clabGun(Frame frame) 
+        {
+            Hand hand = frame.Hands[0];
+            Console.WriteLine("clabGun 진입");
+            GunAction.drawAim(Cursor.Position.X, Cursor.Position.Y, Color.Red);
+        }
+        
 
         //public void pinch(Frame frame)    // 모션추가 베이직
         //{
