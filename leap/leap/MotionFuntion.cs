@@ -26,6 +26,7 @@ namespace leap
         int clickCount = 0;
         private int screenWidth, screenHeight;
         private int frameCount = 0;
+        bool clap_ready = false;
 
         public MotionFuntion(int screenWidth, int screenHeight)
         {
@@ -183,6 +184,34 @@ namespace leap
             else if (hand.GrabStrength == 0 && pull_ready)
             {
                 pull_ready = false;
+            }
+        }
+
+        public void clap(Frame frame)
+        {
+            Hand hand1 = frame.Hands[0];
+            Hand hand2 = frame.Hands[1];
+            if (frame.Hands.Count == 2 && hand1.GrabStrength < 0.05 && hand2.GrabStrength < 0.05)
+            {
+                float dist = Math.Abs(hand1.PalmPosition[0] - hand2.PalmPosition[0]);
+                if (dist < 100 && dist > 10 && !clap_ready)
+                {
+                    clap_ready = true;
+                }
+                else if (clap_ready && dist <= 10)
+                {
+                    if (MotionFuntion.setPTmode)
+                    {
+                        MotionFuntion.setPTmode = false;
+                        keybd_event((byte)Keys.Escape, 0x00, 0x00, 0);
+                    }
+                    else
+                    {
+                        MotionFuntion.setPTmode = true;
+                        keybd_event((byte)Keys.F5, 0x00, 0x00, 0);
+                    }
+                    clap_ready = false;
+                }
             }
         }
 

@@ -26,6 +26,7 @@ namespace leap
                 motionFunction.pinch(frame);
                 motionFunction.grabPull(frame);
                 motionFunction.wheel(frame);
+                motionFunction.clap(frame);
             }
         }
 
