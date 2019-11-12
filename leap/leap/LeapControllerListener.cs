@@ -24,7 +24,6 @@ namespace leap
             
             if (frame.Hands.Count > 0)
             {
-                GunAction.setcur();
                 motionFunction.clabGun(frame);
                 motionFunction.setMouseCursor(frame);
                 motionFunction.grab(frame);
