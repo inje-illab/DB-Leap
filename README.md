@@ -21,17 +21,25 @@
 </br></br>
 
 ## Preview
-
+<div style="text-align: center;">
+<img src="./images/bottom.png" width="50%">
+<img src="./images/start_process.png" width="80%">
+<img src="./images/start_regidit.png" width="80%">
+<img src="./images/main.png" width="70%">
+<img src="./images/Detail_Control.png" width="70%">
+<img src="./images/Drag.png" width="70%">
+<img src="./images/Left_Click.png" width="70%">
+<img src="./images/Move.png" width="70%">
+<img src="./images/Right_Click.png" width="70%">
+<img src="./images/Scroll.png" width="70%">
+</div>
 
 
 ## 결과
-<div style="text-align: center;">
 <img src="./images/1.jpg" width="60%">
-</div>
 
 <div style="text-align: center;">
 <img src="./images/2.jpg" width="50%">
-</div>
 
 <div style="text-align: center;">
 <img src="./images/3.jpg" width="100%">
