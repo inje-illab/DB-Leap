@@ -100,7 +100,7 @@ namespace leap
                 else if (frameCount > 40)
                     drag_ready = false;
             }
-            else if (hand.PinchStrength < 0.05 && pinch_ready)
+            else if (hand.PinchStrength < 0.35 && pinch_ready)
             {
                 mouse_event((uint)MotionEnum.MOUSE.MouseLeftUp, 0, 0, 0, 0);
                 if (frameCount < 60)
@@ -148,7 +148,7 @@ namespace leap
 
         public void wheel(Leap.Frame frame)
         {
-            if (roll_ready==0 && !setPTmode)
+            if (roll_ready == 0 && !setPTmode)
             {
                 if (frame.Hands[0].PalmNormal.z < -0.65)
                 {
@@ -189,32 +189,35 @@ namespace leap
 
         public void clap(Frame frame)
         {
-            Hand hand1 = frame.Hands[0];
-            Hand hand2 = frame.Hands[1];
-            if (frame.Hands.Count == 2 && hand1.GrabStrength < 0.05 && hand2.GrabStrength < 0.05)
+            if (frame.Hands.Count == 2)
             {
-                float dist = Math.Abs(hand1.PalmPosition[0] - hand2.PalmPosition[0]);
-                if (dist < 100 && dist > 10 && !clap_ready)
+                Hand hand1 = frame.Hands[0];
+                Hand hand2 = frame.Hands[1];
+                if (hand1.GrabStrength < 0.05 && hand2.GrabStrength < 0.05)
                 {
-                    clap_ready = true;
-                }
-                else if (clap_ready && dist <= 10)
-                {
-                    if (MotionFuntion.setPTmode)
+
+                    float dist = Math.Abs(hand1.PalmPosition.x - hand2.PalmPosition.x);
+                    if (dist < 100 && dist > 10 && !clap_ready)
                     {
-                        MotionFuntion.setPTmode = false;
-                        keybd_event((byte)Keys.Escape, 0x00, 0x00, 0);
+                        clap_ready = true;
                     }
-                    else
+                    else if (clap_ready && dist <= 10)
                     {
-                        MotionFuntion.setPTmode = true;
-                        keybd_event((byte)Keys.F5, 0x00, 0x00, 0);
+                        if (MotionFuntion.setPTmode)
+                        {
+                            MotionFuntion.setPTmode = false;
+                            keybd_event((byte)Keys.Escape, 0x00, 0x00, 0);
+                        }
+                        else
+                        {
+                            MotionFuntion.setPTmode = true;
+                            keybd_event((byte)Keys.F5, 0x00, 0x00, 0);
+                        }
+                        clap_ready = false;
                     }
-                    clap_ready = false;
                 }
             }
         }
-
         //public void pinch(Frame frame)    // 모션추가 베이직
         //{
         //    Hand hand = frame.Hands[0];
